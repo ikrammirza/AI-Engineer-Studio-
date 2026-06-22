@@ -1,0 +1,17 @@
+.env
+.env.local
+__pycache__/
+*.pyc
+.venv/
+venv/
+node_modules/
+.next/
+out/
+build/
+dist/
+postgres_data/
+redis_data/
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+*.log
