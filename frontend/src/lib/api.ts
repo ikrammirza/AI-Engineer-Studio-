@@ -40,6 +40,67 @@ export const auth = {
   },
 
   me: () => apiRequest("/auth/me"),
-
   logout: () => localStorage.removeItem("token"),
+};
+
+export type PromptVersion = {
+  id: string;
+  prompt_id: string;
+  version_number: number;
+  content: string;
+  commit_message: string | null;
+  model_used: string | null;
+  variables: string[];
+  created_at: string;
+};
+
+export type Prompt = {
+  id: string;
+  name: string;
+  description: string | null;
+  owner_id: string;
+  created_at: string;
+  updated_at: string;
+  latest_version: PromptVersion | null;
+  version_count: number;
+};
+
+export const prompts = {
+  list: () => apiRequest<Prompt[]>("/prompts"),
+
+  get: (id: string) => apiRequest<Prompt>(`/prompts/${id}`),
+
+  create: (data: {
+    name: string;
+    description?: string;
+    content: string;
+    commit_message?: string;
+  }) => apiRequest<Prompt>("/prompts", { method: "POST", body: JSON.stringify(data) }),
+
+  update: (id: string, data: { name?: string; description?: string }) =>
+    apiRequest<Prompt>(`/prompts/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(data),
+    }),
+
+  delete: (id: string) =>
+    apiRequest(`/prompts/${id}`, { method: "DELETE" }),
+
+  listVersions: (id: string) =>
+    apiRequest<PromptVersion[]>(`/prompts/${id}/versions`),
+
+  saveVersion: (
+    id: string,
+    data: { content: string; commit_message?: string; model_used?: string }
+  ) =>
+    apiRequest<PromptVersion>(`/prompts/${id}/versions`, {
+      method: "POST",
+      body: JSON.stringify(data),
+    }),
+
+  interpolate: (content: string, variables: Record<string, string>) =>
+    apiRequest<{ result: string; variables_found: string[]; variables_missing: string[] }>(
+      "/prompts/interpolate",
+      { method: "POST", body: JSON.stringify({ content, variables }) }
+    ),
 };
