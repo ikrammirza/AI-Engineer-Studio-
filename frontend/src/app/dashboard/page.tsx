@@ -39,10 +39,10 @@ export default function DashboardPage() {
     },
     {
       title: "Model Playground",
-      description: "Run prompts across GPT, Claude, Gemini, and Llama side by side.",
-      href: "#",
+      description: "Run prompts across Groq, GPT, Claude side by side.",
+      href: "/dashboard/playground",
       emoji: "🧪",
-      status: "Phase 3",
+      status: "Ready",
     },
     {
       title: "Evaluation Engine",
@@ -76,7 +76,6 @@ export default function DashboardPage() {
 
   return (
     <main className="min-h-screen bg-gray-50">
-      {/* Nav */}
       <div className="border-b bg-white px-8 py-4 flex items-center justify-between">
         <h1 className="text-lg font-bold text-gray-900">AI Engineer Studio</h1>
         <div className="flex items-center gap-4">

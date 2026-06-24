@@ -16,8 +16,14 @@ class Settings(BaseSettings):
     # App
     BACKEND_PORT: int = 8000
 
+    # LLM API Keys
+    GROQ_API_KEY: str = ""
+    OPENAI_API_KEY: str = ""
+    ANTHROPIC_API_KEY: str = ""
+    GOOGLE_API_KEY: str = ""
+
     model_config = SettingsConfigDict(
-        env_file="../.env",  # .env lives at the project root, one level up from backend/
+        env_file="../.env",
         extra="ignore",
     )
 

@@ -104,3 +104,44 @@ export const prompts = {
       { method: "POST", body: JSON.stringify({ content, variables }) }
     ),
 };
+
+export type ModelDefinition = {
+  key: string;
+  name: string;
+  provider: string;
+  max_tokens: number;
+  input_cost_per_1k: number;
+  output_cost_per_1k: number;
+};
+
+export type ModelResult = {
+  model_key: string;
+  model_name: string;
+  provider: string;
+  output: string;
+  input_tokens: number;
+  output_tokens: number;
+  cost_usd: number;
+  latency_ms: number;
+  error: string | null;
+};
+
+export type PlaygroundRunResponse = {
+  results: ModelResult[];
+  total_cost_usd: number;
+  prompt: string;
+};
+
+export const playground = {
+  models: () => apiRequest<ModelDefinition[]>("/playground/models"),
+
+  run: (data: {
+    prompt: string;
+    system?: string;
+    model_keys: string[];
+  }) =>
+    apiRequest<PlaygroundRunResponse>("/playground/run", {
+      method: "POST",
+      body: JSON.stringify(data),
+    }),
+};

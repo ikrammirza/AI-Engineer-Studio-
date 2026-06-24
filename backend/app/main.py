@@ -6,6 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.database import get_db
 from app.api.auth import router as auth_router
 from app.api.prompts import router as prompts_router
+from app.api.playground import router as playground_router
 
 app = FastAPI(
     title="AI Engineer Studio API",
@@ -22,6 +23,7 @@ app.add_middleware(
 
 app.include_router(auth_router)
 app.include_router(prompts_router)
+app.include_router(playground_router)
 
 
 @app.get("/")
