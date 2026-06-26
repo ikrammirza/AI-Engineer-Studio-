@@ -47,7 +47,7 @@ export default function DashboardPage() {
     {
       title: "Evaluation Engine",
       description: "Upload test datasets and auto-score prompt quality.",
-      href: "#",
+      href: "/dashboard/evaluation",
       emoji: "📊",
       status: "Phase 4",
     },

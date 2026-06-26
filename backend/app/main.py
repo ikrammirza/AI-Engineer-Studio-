@@ -7,11 +7,9 @@ from app.db.database import get_db
 from app.api.auth import router as auth_router
 from app.api.prompts import router as prompts_router
 from app.api.playground import router as playground_router
+from app.api.evaluation import router as evaluation_router
 
-app = FastAPI(
-    title="AI Engineer Studio API",
-    version="0.1.0",
-)
+app = FastAPI(title="AI Engineer Studio API", version="0.1.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -24,6 +22,7 @@ app.add_middleware(
 app.include_router(auth_router)
 app.include_router(prompts_router)
 app.include_router(playground_router)
+app.include_router(evaluation_router)
 
 
 @app.get("/")
